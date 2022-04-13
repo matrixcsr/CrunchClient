@@ -6,6 +6,7 @@
 package com.humber.restcontroller;
 
 import com.humber.models.Classes;
+import com.humber.models.MembershipInfo;
 import com.humber.models.UserModel;
 import java.sql.SQLException;
 import java.util.List;
@@ -59,6 +60,16 @@ public class GenericResource {
         ClassInfo ci = new ClassInfo();
         //TODO return proper representation object
         return ci.getClassInfo();
+    }
+        
+        
+        @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getInfo")
+        public List<MembershipInfo> getMembershipInfo() throws SQLException {
+        MembershipMethods mm = new MembershipMethods();
+        //TODO return proper representation object
+        return mm.getMembershipInfo();
     }
     /**
      * PUT method for updating or creating an instance of GenericResource

@@ -29,6 +29,23 @@ import jdk.nashorn.internal.parser.JSONParser;
  */
 public class Authenticate extends HttpServlet {
 
+        @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        Cookie[] cookies = request.getCookies();
+    if (cookies != null){
+        for (Cookie cookie : cookies) {
+            System.out.println("Reading cookies");
+            cookie.setValue("");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        }
+    }
+        request.getRequestDispatcher("./Login.jsp").forward(request, response);
+    }
+    
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,13 +84,23 @@ public class Authenticate extends HttpServlet {
             System.out.println(validation.getName());
             if(validation.getName() != null){
                 
+                if(validation.isIsAdmin() == true){
                 
+                Cookie c2=new Cookie("isAdmin","Test");
+                c2.setSecure(true);
+                c2.setHttpOnly(true);
+                c2.setMaxAge(1800);     
+                response.addCookie(c2);     
+                
+                }
                 Cookie c1=new Cookie("id",String.valueOf(validation.getId()));
                 c1.setSecure(true);
                 c1.setHttpOnly(true);
                 c1.setMaxAge(1800);
                 response.addCookie(c1);
                 request.getRequestDispatcher("./UserViews/index.jsp").forward(request, response);
+                
+                
             }
             else{
                 request.setAttribute("error", "Invalid Credentials");

@@ -13,6 +13,11 @@
     response.sendRedirect(redirectURL);
 %>
     </c:if>
+    <c:if test="${cookie.containsKey('isAdmin')}">
+        <%
+    response.sendRedirect("/CrunchClient/AdminViews/index.jsp");
+%>
+    </c:if>
 
 <!doctype html>
 <html lang="en">

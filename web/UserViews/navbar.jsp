@@ -66,10 +66,14 @@
           <li class="nav-item">
             <a class="nav-link" href="/CrunchClient/UserViews/Bookings.jsp">My Bookings</a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="/CrunchClient/UserViews/Contact.jsp">Contact us</a>
-          </li>
+
         </ul>
+        <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
+
+
+                    <a class="nav-link" href="../Authenticate">Logout</a> <!--Redundant-->
+
+                </ul>
         
       </div>
     </nav>

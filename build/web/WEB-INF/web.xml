@@ -8,6 +8,10 @@
         <servlet-name>RegisterClass</servlet-name>
         <servlet-class>com.humber.controller.RegisterClass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Membership</servlet-name>
+        <servlet-class>com.humber.controller.Membership</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Authenticate</servlet-name>
         <url-pattern>/Authenticate</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>RegisterClass</servlet-name>
         <url-pattern>/RegisterClass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Membership</servlet-name>
+        <url-pattern>/Membership</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

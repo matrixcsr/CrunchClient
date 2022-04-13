@@ -218,6 +218,14 @@ width: 60%;
                                     </div>
 
                                 </div>
+                                <button type="button" id="buy" class="btn btn-secondary">Buy Membership</button>
+                                
+                                <script type="text/javascript">
+    document.getElementById("buy").onclick = function () {
+        location.href = "/CrunchClient/UserViews/Pricing.jsp";
+    };
+</script>
+                                
                                 <ul class="social-link list-unstyled m-t-40 m-b-10">
                                     <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="facebook" data-abc="true"><i class="mdi mdi-facebook feather icon-facebook facebook" aria-hidden="true"></i></a></li>
                                     <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="twitter" data-abc="true"><i class="mdi mdi-twitter feather icon-twitter twitter" aria-hidden="true"></i></a></li>

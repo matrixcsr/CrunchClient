@@ -15,16 +15,6 @@
     </c:if>
 <html>
   <head>
-    <style>
-      .navbar-custom {
-        background-color: #183c54;
-      }
-      div.padd {
-        padding-left: 20px;
-        padding-top: 0px;
-      }
-    </style>
-    
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -34,45 +24,57 @@
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
   </head>
   <body>
-    <nav
-      class="navbar navbar-dark navbar-expand-md navbar-custom justify-content-center navbar-corner h-5"
-    >
-      <div class="padd">
-
-      </div>
-
-      <button
-        class="navbar-toggler ml-1"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsingNavbar2"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse justify-content-between align-items-center w-100"
-        id="collapsingNavbar2"
-      >
-        <ul class="navbar-nav mx-auto text-center">
-          <li class="nav-item active">
-            <a class="nav-link" href="/CrunchClient/UserViews/index.jsp">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/CrunchClient/UserViews/UserProfile.jsp">My Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/CrunchClient/UserViews/Classes.jsp">Register for Classes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/CrunchClient/UserViews/Bookings.jsp">My Bookings</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="/CrunchClient/UserViews/Contact.jsp">Contact us</a>
-          </li>
-        </ul>
-        
-      </div>
-    </nav>
+   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Admin Panel</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="/CrunchClient/AdminViews/index.jsp" class="nav-link " aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+          List Users
+        </a>
+      </li>
+      <li>
+        <a href="/CrunchClient/AdminViews/UserBookings.jsp" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          Get User Bookings
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="../common/assets/Matrix.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong id="adminName">Admin</strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" style="">
+        <li><a class="dropdown-item" href="#">Chaitanya</a></li>
+        <li><a class="dropdown-item" href="#">Rahul</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+           <script>
+            const user = location.protocol + '//' + location.host+'/CrunchClient/webresources/generic/getuser/'+ ${cookie['id'].getValue()};
+            
+                            $.ajax({
+                    url: user,    //calling the Week route in DBAPIController
+                    type: "GET",
+                    contentType: "application/json",
+                    data:"",                //passing the year as arguement.
+                    dataType: "json",
+                    success: function (result) {                    
+                   document.getElementById("adminName").textContent = result[0].name;
+                    },
+                    error: function (err) {
+                        alert("REST service error");
+                    },
+                })
+         </script>
   </body>
 </html>
 
