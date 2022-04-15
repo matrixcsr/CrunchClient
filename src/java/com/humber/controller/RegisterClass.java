@@ -52,8 +52,8 @@ public class RegisterClass extends HttpServlet {
         }
         
         try { 
-            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(date);
-            
+            Date date1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(date);
+            System.out.println(date1);
             
             
         } catch (ParseException ex) {

@@ -47,7 +47,7 @@
   <option value="Brampton">Brampton</option>
   <option value="Downtown">Downtown</option>
   <option value="Scarborough">Scarborough</option>
-</select> </div><div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Schedule<span class="text-danger"> *</span></label> <input type="date" name="date" id="txtBegin" required/> </div>
+</select> </div><div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Schedule<span class="text-danger"> *</span></label> <input type="datetime-local" name="date" id="txtBegin" required/> </div>
                     </div>
                     
                     
