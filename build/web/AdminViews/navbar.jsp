@@ -54,7 +54,7 @@
         <li><a class="dropdown-item" href="#">Chaitanya</a></li>
         <li><a class="dropdown-item" href="#">Rahul</a></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Logout</a></li>
+        <li><a class="nav-link" href="../Authenticate">Logout</a> <!--Redundant--></li>
       </ul>
     </div>
   </div>

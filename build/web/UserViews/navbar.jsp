@@ -71,7 +71,7 @@
         <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
 
 
-                    <a class="nav-link" href="../Authenticate">Logout</a> <!--Redundant-->
+                    <a class="nav-link" href="../Authenticate">Logout</a> 
 
                 </ul>
         
