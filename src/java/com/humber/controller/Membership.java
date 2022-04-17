@@ -5,8 +5,12 @@
  */
 package com.humber.controller;
 
+import com.humber.interfaces.User;
+import com.humber.services.IUsers;
+import com.humber.services.UsersService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Matrix
  */
 public class Membership extends HttpServlet {
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -28,12 +33,24 @@ public class Membership extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
+        UsersService usersService = new UsersService();
+        IUsers port = usersService.getUsersPort();
+
         String id = request.getParameter("userId");
         String memId = request.getParameter("memId");
-        
-        
-        
+        if (id == null || memId == null || id.isEmpty() || memId.isEmpty()) {
+            request.setAttribute("errorMessage", "Cannot Process Request");
+            request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
+        } else {
+            boolean status = port.addMembership(Integer.valueOf(id), Integer.valueOf(memId));
+            if (status) {
+                response.sendRedirect(request.getContextPath() + "/UserViews/UserProfile.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/common/Error.jsp");
+            }
+        }
+
     }
 
     /**

@@ -176,7 +176,10 @@ width: 60%;
                    document.getElementById("username").textContent = result[0].name;
                    document.getElementById("email").textContent = result[0].email;
                    document.getElementById("userId").textContent = result[0].id;
-                   document.getElementById("subTier").textContent = result[0].is_pro_member;
+                   document.getElementById("subTier").textContent = result[0].is_pro_member ? "Pro User" : "Trial User";
+                    if(result[0].is_pro_member) {
+                        document.getElementById("buy").remove();
+                    }
                     },
                     error: function (err) {
                         alert("Something went wrong!");

@@ -32,15 +32,15 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="/CrunchClient/AdminViews/index.jsp" class="nav-link " aria-current="page">
+        <a href="../Users" class="nav-link " aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
           List Users
         </a>
       </li>
       <li>
-        <a href="/CrunchClient/AdminViews/UserBookings.jsp" class="nav-link text-white">
+        <a href="../UserBookings?${cookie.isAdmin.value}" class="nav-link text-white">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-          Get User Bookings
+          Get All User Bookings
         </a>
       </li>
     </ul>

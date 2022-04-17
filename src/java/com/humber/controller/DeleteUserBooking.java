@@ -5,14 +5,13 @@
  */
 package com.humber.controller;
 
-import com.humber.interfaces.BookingClass;
 import com.humber.services.BookingService;
 import com.humber.services.IBooking;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Chaitanya
  */
-@WebServlet(name = "UserBookings", urlPatterns = {"/UserBookings"})
-public class UserBookings extends HttpServlet {
+@WebServlet(name = "DeleteUserBooking", urlPatterns = {"/DeleteUserBooking"})
+public class DeleteUserBooking extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,34 +38,38 @@ public class UserBookings extends HttpServlet {
         BookingService service = new BookingService();
         IBooking port = service.getBookingPort();
 
-        String id = request.getParameter("id");
-        String isAdmin = request.getParameter("isAdmin");
-        try {
-            if (id != null || !id.isEmpty()) {
-                List<BookingClass> bookings = port.getUserBookings(Integer.valueOf(id));
-                request.setAttribute("bookings", bookings);
-                request.getRequestDispatcher("./UserViews/Bookings.jsp").forward(request, response);
-            } 
-            else if(isAdmin != null || !isAdmin.isEmpty()) {
-                //Admin retrieves all bookings
-                List<BookingClass> bookings = port.getUserBookings(-1);
-                request.setAttribute("bookings", bookings);
-                request.getRequestDispatcher("./AdminViews/UserBookings.jsp").forward(request, response);
-            } 
-            else {
-                request.setAttribute("errorMessage", "Cannot Process Request");
-                request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
+        String bookingID = request.getParameter("booking_id");
+        Cookie[] cookies = request.getCookies();
+        String isAdmin = "";
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("isAdmin")) {
+                    isAdmin = cookie.getValue();
+                }
             }
-        } catch (Exception e) {
+        }
+        boolean status;
+        if (bookingID != null || !bookingID.isEmpty()) {
+            if (!isAdmin.isEmpty()) {
+                status = port.deleteBooking(Integer.valueOf(bookingID));
+                if (status) {
+                   response.sendRedirect(request.getContextPath() + "/AdminViews/UserBookings.jsp");
+                }
+            } else {
+                status = port.deleteBooking(Integer.valueOf(bookingID));
+                if (status) {
+                   response.sendRedirect(request.getContextPath() + "/UserViews/Bookings.jsp");
+                }
+            }
+        } else {
             request.setAttribute("errorMessage", "Cannot Process Request");
             request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
         }
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -74,7 +77,7 @@ public class UserBookings extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
