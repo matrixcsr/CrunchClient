@@ -22,87 +22,81 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jdk.nashorn.internal.parser.JSONParser;
 
-
 /**
  *
  * @author Matrix
  */
 public class Authenticate extends HttpServlet {
 
-        @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         Cookie[] cookies = request.getCookies();
-    if (cookies != null){
-        for (Cookie cookie : cookies) {
-            System.out.println("Reading cookies");
-            cookie.setValue("");
-            cookie.setMaxAge(0);
-            response.addCookie(cookie);
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                System.out.println("Reading cookies");
+                cookie.setValue("");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
         }
-    }
         request.getRequestDispatcher("./Login.jsp").forward(request, response);
     }
-    
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         LoginService service = new LoginService();
         ILogin port = service.getLoginPort();
-        
+
         String input = request.getParameter("action");
         PrintWriter out = response.getWriter();
-        if("Register".equals(input)){
-           String email = request.getParameter("email");
-           String username = request.getParameter("username");
-           String password = request.getParameter("password");
-           
-           if(email == null || username == null || password==null){
-               request.setAttribute("error", "Please fill all the information!");
-               request.getRequestDispatcher("/Register.jsp").forward(request, response);
-           }
-           else if("".equals(email) || "".equals(username) || "".equals(password)){
-               request.setAttribute("error", "Please fill all the information!");
-               request.getRequestDispatcher("/Register.jsp").forward(request, response);
-           }
-           else{
-                        port.registerUser(username, email, password);
-                        out.println("done");  
-                        request.setAttribute("generalmsg", "Please Login to continue");
-                        request.getRequestDispatcher("/Login.jsp").forward(request, response);
-           } 
+        if ("Register".equals(input)) {
+            String email = request.getParameter("email");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            if (email == null || username == null || password == null) {
+                request.setAttribute("error", "Please fill all the information!");
+                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            } else if ("".equals(email) || "".equals(username) || "".equals(password)) {
+                request.setAttribute("error", "Please fill all the information!");
+                request.getRequestDispatcher("/Register.jsp").forward(request, response);
+            } else {
+                port.registerUser(username, email, password);
+                out.println("done");
+                request.setAttribute("generalmsg", "Please Login to continue");
+                request.getRequestDispatcher("/Login.jsp").forward(request, response);
+            }
         }
-        
-        if("Login".equals(input)){
-           String email = request.getParameter("email");
-           String password = request.getParameter("password");
-           
+
+        if ("Login".equals(input)) {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
             User validation = port.authenticate(email, password);
             System.out.println(validation.getName());
-            if(validation.getName() != null){
-                
-                if(validation.isIsAdmin() == true){
-                
-                Cookie c2=new Cookie("isAdmin","Test");
-                c2.setSecure(true);
-                c2.setHttpOnly(true);
-                c2.setMaxAge(1800);     
-                response.addCookie(c2);     
-                
+            if (validation.getName() != null) {
+
+                if (validation.isIsAdmin() == true) {
+
+                    Cookie c2 = new Cookie("isAdmin", "Test");
+                    c2.setSecure(true);
+                    c2.setHttpOnly(true);
+                    c2.setMaxAge(86400);
+                    response.addCookie(c2);
+
                 }
-                Cookie c1=new Cookie("id",String.valueOf(validation.getId()));
+                Cookie c1 = new Cookie("id", String.valueOf(validation.getId()));
                 c1.setSecure(true);
                 c1.setHttpOnly(true);
-                c1.setMaxAge(1800);
+                c1.setMaxAge(86400);
                 response.addCookie(c1);
                 request.getRequestDispatcher("./UserViews/index.jsp").forward(request, response);
-                
-                
-            }
-            else{
+
+            } else {
                 request.setAttribute("error", "Invalid Credentials");
                 request.getRequestDispatcher("/Login.jsp").forward(request, response);
             }

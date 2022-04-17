@@ -20,6 +20,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Inside Bookings</h1>
+        <h1>${requestScope.bookings[1].className}</h1>
     </body>
 </html>

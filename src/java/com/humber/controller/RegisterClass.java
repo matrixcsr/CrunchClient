@@ -7,6 +7,7 @@ package com.humber.controller;
 
 import com.humber.services.BookingService;
 import com.humber.services.IBooking;
+import com.humber.utils.AppUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -45,22 +46,18 @@ public class RegisterClass extends HttpServlet {
         String class_id = request.getParameter("classId");
         String location  = request.getParameter("location");
         String date  = request.getParameter("date");
-        
         if(id == null || class_id == null || location == null || date == null){
             request.setAttribute("error", "Something went wrong");
-            request.getRequestDispatcher("./UserViews/Classes.jsp").forward(request, response);
+            request.getRequestDispatcher("./UserViews/Bookings.jsp").forward(request, response);
+            return;
         }
-        
-        try { 
-            Date date1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(date);
-            System.out.println(date1);
-            
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(RegisterClass.class.getName()).log(Level.SEVERE, null, ex);
+        String status = port.createBooking(Integer.valueOf(id), date, Integer.valueOf(class_id), location);
+        if(status.equals("success")) {
+            response.sendRedirect(request.getContextPath() + "/UserViews/Bookings.jsp");
+        } else {
+            request.setAttribute("error", "Booking Cannot be created");
+            request.getRequestDispatcher("./UserViews/RegisterBoxing.jsp").forward(request, response);
         }
-        System.out.println(date);
-        
     }
 
     /**

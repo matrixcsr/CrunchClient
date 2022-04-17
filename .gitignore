@@ -4,3 +4,6 @@ target
 !.settings/.jsdtscope
 .project
 .classpath
+/build
+/nbproject
+/dist

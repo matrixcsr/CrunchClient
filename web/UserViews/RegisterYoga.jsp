@@ -20,7 +20,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="../common/css/Regform.css">
-        <script>$('.datepicker').datepicker();</script>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     </head>
     <body>
 
@@ -29,11 +30,13 @@
         <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
             <h3>Register for Yoga</h3>
             <p class="blue-text">Fill up the following form to register</p>
+            ${error}
+            <c:remove var = "error"/>
             <div class="card">
                 <h5 class="text-center mb-4">Yoga</h5>
                 <form class="form-card" action="../RegisterClass" method="POST">
-                    <input type="text" name="userId" id="userId" disabled hidden />
-                    <input type="text" name="classId" id="classId" disabled hidden value="2" />
+                    <input type="text" name="userId" id="userId"  hidden value="${cookie['id']}"/>
+                    <input type="text" name="classId" id="classId" hidden value="2" />
                     <div class="row  ">
                         <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Username<span class="text-danger"> *</span></label> <input type="text" id="fname" name="fname" disabled required> </div>
                         
@@ -48,7 +51,7 @@
   <option value="Brampton">Brampton</option>
   <option value="Downtown">Downtown</option>
   <option value="Scarborough">Scarborough</option>
-</select> </div><div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Schedule<span class="text-danger"> *</span></label> <input type="date" name="date" id="txtBegin" required/> </div>
+</select> </div><div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Schedule<span class="text-danger"> *</span></label> <input type="datetime-local" class="datepicker" name="date" id="txtBegin" value="2022-04-25T19:24:23" required/> </div>
                     </div>
                     
                     
@@ -84,5 +87,6 @@
                     },
                 })
          </script>
+         <!--<script>$('.datepicker').datepicker();</script>-->
     </body>
 </html>
