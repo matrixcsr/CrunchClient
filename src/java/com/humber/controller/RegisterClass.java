@@ -30,7 +30,7 @@ public class RegisterClass extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
         
         BookingService service = new BookingService();
         IBooking port = service.getBookingPort();
@@ -46,7 +46,8 @@ public class RegisterClass extends HttpServlet {
         }
         String status = port.createBooking(Integer.valueOf(id), date, Integer.valueOf(class_id), location);
         if(status.equals("success")) {
-            response.sendRedirect(request.getContextPath() + "/UserViews/Bookings.jsp");
+            
+            response.sendRedirect(request.getContextPath() + "/UserBookings?id="+id);
         } else {
             request.setAttribute("error", "Booking Cannot be created");
             request.getRequestDispatcher("./UserViews/RegisterBoxing.jsp").forward(request, response);

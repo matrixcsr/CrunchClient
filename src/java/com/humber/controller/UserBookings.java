@@ -38,16 +38,22 @@ public class UserBookings extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         BookingService service = new BookingService();
         IBooking port = service.getBookingPort();
-
-        String id = request.getParameter("id");
-        String isAdmin = request.getParameter("isAdmin");
+        
+        
+        String id = null;
+        String isAdmin = null;
+        isAdmin = request.getParameter("val");
+        id = request.getParameter("id");
+        
+        System.out.println(id);
+        System.out.println(isAdmin);
         try {
-            if (id != null || !id.isEmpty()) {
+            if (id != null || "".equals(id)) {
                 List<BookingClass> bookings = port.getUserBookings(Integer.valueOf(id));
                 request.setAttribute("bookings", bookings);
                 request.getRequestDispatcher("./UserViews/Bookings.jsp").forward(request, response);
             } 
-            else if(isAdmin != null || !isAdmin.isEmpty()) {
+            else if(isAdmin != null || "".equals(isAdmin)) {
                 //Admin retrieves all bookings
                 List<BookingClass> bookings = port.getUserBookings(-1);
                 request.setAttribute("bookings", bookings);
@@ -58,7 +64,7 @@ public class UserBookings extends HttpServlet {
                 request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            request.setAttribute("errorMessage", "Cannot Process Request");
+            request.setAttribute("errorMessage", e);
             request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
         }
 
@@ -76,7 +82,36 @@ public class UserBookings extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+         BookingService service = new BookingService();
+        IBooking port = service.getBookingPort();
+        String id = null;
+        String isAdmin = null;
+        isAdmin = request.getParameter("val");
+        id = request.getParameter("id");
+        try{
+            if (id != null || "".equals(id)) {
+                List<BookingClass> bookings = port.getUserBookings(Integer.valueOf(id));
+                request.setAttribute("bookings", bookings);
+                request.getRequestDispatcher("./UserViews/Bookings.jsp").forward(request, response);
+            } 
+            else if(isAdmin != null || "".equals(isAdmin)) {
+                //Admin retrieves all bookings
+                List<BookingClass> bookings = port.getUserBookings(-1);
+                request.setAttribute("bookings", bookings);
+                request.getRequestDispatcher("./AdminViews/UserBookings.jsp").forward(request, response);
+            } 
+            else {
+                request.setAttribute("errorMessage", "Cannot Process Request");
+                request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
+            }
+        }
+        catch (Exception e) {
+            request.setAttribute("errorMessage", e);
+            request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
+        }
+                    
+        
     }
 
     /**

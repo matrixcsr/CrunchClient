@@ -49,16 +49,18 @@ public class DeleteUserBooking extends HttpServlet {
             }
         }
         boolean status;
-        if (bookingID != null || !bookingID.isEmpty()) {
+        if (bookingID != null || "".equals(bookingID)) {
             if (!isAdmin.isEmpty()) {
                 status = port.deleteBooking(Integer.valueOf(bookingID));
+                System.out.println(status);
+                System.out.println(bookingID);
                 if (status) {
-                   response.sendRedirect(request.getContextPath() + "/AdminViews/UserBookings.jsp");
+                   response.sendRedirect(request.getContextPath() + "/UserBookings");
                 }
             } else {
                 status = port.deleteBooking(Integer.valueOf(bookingID));
                 if (status) {
-                   response.sendRedirect(request.getContextPath() + "/UserViews/Bookings.jsp");
+                   response.sendRedirect(request.getContextPath() + "/UserBookings");
                 }
             }
         } else {

@@ -53,8 +53,27 @@
 </div>
        
 <div class="container my-4">
-    
-List the users and do crud like delete them or change their member ship status
+    <table class="table table-hover">
+    <thead class="table-dark">
+          <tr>
+          <th>User id</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Action</th>
+      </tr>
+      </thead>
+  <c:forEach items="${users}" var="user">
+    <tr>
+      <td><c:out value="${user.id}" /></td>
+      <td><c:out value="${user.name}" /></td>
+      <td><c:out value="${user.email}" /></td>
+      <td><c:out value="${user.membership_id}" /></td>
+      <td>Cancel Booking</td>
+      
+    </tr>
+  </c:forEach>
+</table>
 
      
 </div>

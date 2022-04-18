@@ -36,11 +36,18 @@ public class Users extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         UsersService usersService = new UsersService();
         IUsers port = usersService.getUsersPort();
+         String id = "";
+        
+        response.setContentType("text/html;charset=UTF-8");
+        
+
+
+        try {
+                    
         Cookie[] cookies = request.getCookies();
-        String id = "";
+       
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("id")) {
@@ -48,17 +55,21 @@ public class Users extends HttpServlet {
                 }
             }
         }
-        try {
-            if (!id.isEmpty()) {
+            
+            
+            if ("".equals(id)) {
                 List<User> users = port.getAllUsers(Integer.valueOf(id));
+                System.out.println(id+ " " + users.toString());
                 request.setAttribute("users", users);
-                request.getRequestDispatcher("./AdminViews/Users.jsp").forward(request, response);
+                request.getRequestDispatcher("./AdminViews/index.jsp").forward(request, response);
             } else {
+                System.out.println(id);
                 request.setAttribute("errorMessage", "Cannot Process Request");
                 request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException | ServletException e) {
             request.setAttribute("errorMessage", "Cannot Process Request");
+            System.out.println(e.toString());
             request.getRequestDispatcher("./common/Error.jsp").forward(request, response);
         }
     }
