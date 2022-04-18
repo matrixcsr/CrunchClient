@@ -6,4 +6,14 @@
     <system systemId="http://localhost:8899/project/BookingService?WSDL" uri="src/conf/xml-resources/web-service-references/BookingService/wsdl/localhost_8899/project/BookingService.wsdl"/>
     <system systemId="http://localhost:8899/project/BookingService?wsdl=1" uri="src/conf/xml-resources/web-service-references/BookingService/wsdl/localhost_8899/project/BookingService.wsdl_1.wsdl"/>
     <system systemId="http://localhost:8899/project/BookingService?xsd=1" uri="src/conf/xml-resources/web-service-references/BookingService/wsdl/localhost_8899/project/BookingService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/CrunchWebService/LoginService?wsdl" uri="src/conf/xml-resources/web-service-references/LoginService_1/wsdl/localhost_8080/CrunchWebService/LoginService.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/LoginService?wsdl=1" uri="src/conf/xml-resources/web-service-references/LoginService_1/wsdl/localhost_8080/CrunchWebService/LoginService.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/LoginService?xsd=1" uri="src/conf/xml-resources/web-service-references/LoginService_1/wsdl/localhost_8080/CrunchWebService/LoginService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/CrunchWebService/UsersService?wsdl" uri="src/conf/xml-resources/web-service-references/UsersService/wsdl/localhost_8080/CrunchWebService/UsersService.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/BookingService?wsdl" uri="src/conf/xml-resources/web-service-references/BookingService_1/wsdl/localhost_8080/CrunchWebService/BookingService.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/BookingService?wsdl=1" uri="src/conf/xml-resources/web-service-references/BookingService_1/wsdl/localhost_8080/CrunchWebService/BookingService.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/BookingService?xsd=1" uri="src/conf/xml-resources/web-service-references/BookingService_1/wsdl/localhost_8080/CrunchWebService/BookingService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/CrunchWebService/UsersService?WSDL" uri="src/conf/xml-resources/web-service-references/UsersService_2/wsdl/localhost_8080/CrunchWebService/UsersService.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/UsersService?wsdl=1" uri="src/conf/xml-resources/web-service-references/UsersService_2/wsdl/localhost_8080/CrunchWebService/UsersService.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/UsersService?xsd=1" uri="src/conf/xml-resources/web-service-references/UsersService_2/wsdl/localhost_8080/CrunchWebService/UsersService.xsd_1.xsd"/>
 </catalog>

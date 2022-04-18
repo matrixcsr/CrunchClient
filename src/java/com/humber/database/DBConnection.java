@@ -25,9 +25,9 @@ public class DBConnection {
             if (conn != null) {
                 return;
             }
-            String dbURL = "jdbc:mysql://localhost:3333/crunch?autoReconnect=true&useSSL=FALSE";
-            String userName = "root";
-            String password = "1234";
+            String dbURL = "jdbc:mysql://localhost:3306/crunch?autoReconnect=true&useSSL=FALSE";
+            String userName = "chai";
+            String password = "12345";
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(dbURL, userName, password);
         } catch (Exception e) {

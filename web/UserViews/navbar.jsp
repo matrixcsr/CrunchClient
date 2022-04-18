@@ -64,13 +64,12 @@
             <a class="nav-link" href="/CrunchClient/UserViews/Classes.jsp">Register for Classes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../UserBookings?id=${cookie.id.value}">My Bookings</a>
+            <a class="nav-link" href="<%= request.getContextPath() %>/UserBookings?id=${cookie.id.value}">My Bookings</a>
           </li>
         </ul>
         <ul class="nav navbar-nav flex-row justify-content-center flex-nowrap">
 
-
-                    <a class="nav-link" href="../Authenticate">Logout</a> 
+                    <a class="nav-link" href="<%= request.getContextPath() %>/Authenticate">Logout</a> 
 
                 </ul>
         

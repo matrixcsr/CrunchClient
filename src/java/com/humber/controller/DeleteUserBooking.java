@@ -41,24 +41,30 @@ public class DeleteUserBooking extends HttpServlet {
         String bookingID = request.getParameter("booking_id");
         Cookie[] cookies = request.getCookies();
         String isAdmin = "";
+        String userID = "";
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("isAdmin")) {
                     isAdmin = cookie.getValue();
                 }
+                if (cookie.getName().equals("id")) {
+                    userID = cookie.getValue();
+                }
             }
         }
         boolean status;
-        if (bookingID != null || !bookingID.isEmpty()) {
+        if (bookingID != null || "".equals(bookingID)) {
             if (!isAdmin.isEmpty()) {
                 status = port.deleteBooking(Integer.valueOf(bookingID));
+                System.out.println(status);
+                System.out.println(bookingID);
                 if (status) {
-                   response.sendRedirect(request.getContextPath() + "/AdminViews/UserBookings.jsp");
+                   response.sendRedirect(request.getContextPath() + "/UserBookings?val=Admin");
                 }
             } else {
                 status = port.deleteBooking(Integer.valueOf(bookingID));
                 if (status) {
-                   response.sendRedirect(request.getContextPath() + "/UserViews/Bookings.jsp");
+                   response.sendRedirect(request.getContextPath() + "/UserBookings?id="+userID);
                 }
             }
         } else {

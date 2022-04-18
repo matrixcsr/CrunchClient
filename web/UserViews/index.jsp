@@ -15,7 +15,7 @@
     </c:if>
     <c:if test="${cookie.containsKey('isAdmin')}">
         <%
-    response.sendRedirect("/CrunchClient/AdminViews/index.jsp");
+    response.sendRedirect("/CrunchClient/Users");
 %>
     </c:if>
 

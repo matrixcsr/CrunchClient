@@ -6,4 +6,7 @@
     <system systemId="http://localhost:8899/project/BookingService?WSDL" uri="wsdl/localhost_8899/project/BookingService.wsdl"/>
     <system systemId="http://localhost:8899/project/BookingService?wsdl=1" uri="wsdl/localhost_8899/project/BookingService.wsdl_1.wsdl"/>
     <system systemId="http://localhost:8899/project/BookingService?xsd=1" uri="wsdl/localhost_8899/project/BookingService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/CrunchWebService/UsersService?wsdl" uri="wsdl/localhost_8080/CrunchWebService/UsersService.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/UsersService?wsdl=1" uri="wsdl/localhost_8080/CrunchWebService/UsersService.wsdl_1.wsdl"/>
+    <system systemId="http://localhost:8080/CrunchWebService/UsersService?xsd=1" uri="wsdl/localhost_8080/CrunchWebService/UsersService.xsd_1.xsd"/>
 </catalog>
